@@ -1,0 +1,6 @@
+[dev:children]
+dot-servers
+
+[dot-servers]
+dev-poc-1.poc.cloud  ansible_user=ec2-user
+dev-poc-2.poc.cloud  ansible_user=ec2-user

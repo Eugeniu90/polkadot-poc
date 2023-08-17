@@ -1,0 +1,44 @@
+---
+- name: Install required dependencies
+  apt:
+    name:
+      - curl
+      - jq
+    state: present
+
+- name: Create Polkadot user
+  user:
+    name: "{{ polkadot_user }}"
+    system: yes
+    home: "{{ polkadot_directory }}"
+    shell: /bin/false
+
+- name: Create Polkadot directory
+  file:
+    path: "{{ polkadot_directory }}"
+    state: directory
+    owner: "{{ polkadot_user }}"
+    group: "{{ polkadot_user }}"
+    mode: 0755
+
+- name: Download Polkadot binary
+  get_url:
+    url: "{{ polkadot_binary_url }}"
+    dest: "{{ polkadot_directory }}/polkadot"
+    mode: 0755
+    owner: "{{ polkadot_user }}"
+    group: "{{ polkadot_user }}"
+
+- name: Create Polkadot service
+  template:
+    src: polkadot.service.j2
+    dest: /etc/systemd/system/polkadot.service
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Enable and start Polkadot service
+  systemd:
+    name: polkadot
+    enabled: yes
+    state: started

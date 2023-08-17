@@ -1,0 +1,14 @@
+[Unit]
+Description=Polkadot Full Node
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User={{ polkadot_user }}
+ExecStart={{ polkadot_directory }}/polkadot
+Restart=always
+RestartSec=3
+LimitNOFILE=4096
+
+[Install]
+WantedBy=multi-user.target

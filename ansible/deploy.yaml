@@ -1,0 +1,7 @@
+---
+- name: Deployment of Playbook
+  hosts: all
+  vars:
+    ansible_ssh_private_key_file: "~/.ssh/{{ aws_account }}-{{ aws_region }}-{{ env }}.pem"
+  roles:
+    - { name: dot,               tags: [ dot ]}

@@ -1,0 +1,5 @@
+---
+dot_version: ""
+polkadot_binary_url: "https://github.com/paritytech/polkadot/releases/download/v{{ dot_version }}/polkadot"
+polkadot_user: polkadot
+polkadot_directory: "/var/lib/polkadot"
